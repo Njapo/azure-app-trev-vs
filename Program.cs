@@ -1,3 +1,6 @@
+using azure_app_trev_vs.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace azure_app_trev_vs
 {
     public class Program
@@ -8,6 +11,10 @@ namespace azure_app_trev_vs
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            var connectionString = builder.Configuration.GetConnectionString("AzureSqlConnection");
+            builder.Services.AddDbContext<AppDbContex>(options=>options.UseSqlServer(connectionString));
+
 
             var app = builder.Build();
 
